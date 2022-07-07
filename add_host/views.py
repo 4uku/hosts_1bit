@@ -14,4 +14,5 @@ def signup(request):
         'form': form,
         'header': header
     }
-    return render(request, 'register.html', context)  
+    return render(request, 'signup.html', context)
+    
