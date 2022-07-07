@@ -11,3 +11,6 @@
 - YOURHOST/logout/ - страница выхода из профиля
 - YOURHOST/add_host/ - страница добавления хоста
 - YOURHOST/hosts/HOST_ID/edit/host - страница редактирования хоста
+- YOURHOST/all_hosts/ - страница со всеми хостами, доступна только для персонала (is_staff)
+
+Флаг is_staff устанавливается в админке.
