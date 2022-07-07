@@ -12,6 +12,7 @@
               <th scope="col">Порт</th>
               <th scope="col">Ресурс</th>
               <th scope="col">Последнее редактирование</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -20,7 +21,7 @@
               <td>{{ host.port }}</td>
               <td>{{ host.resource }}</td>
               <td>{{ host.date_edit }}</td>
-              <td><a href="{% url 'index' %}">Редактировать хост</a></td>
+              <td><a href="{% url 'edit_host' host.id%}">Редактировать хост</a></td>
             </tr>
             {% endfor %}
           </tbody>

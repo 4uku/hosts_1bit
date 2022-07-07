@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from .forms import HostForm
 from .models import Host
+from django.shortcuts import get_object_or_404
 
 
 def index(request):
@@ -47,6 +48,19 @@ def add_host(request):
     return render(request, 'login.html', context)
 
 
-# @login_required
-# @csrf_exempt
-# def edit_host(request):
+@login_required
+@csrf_exempt
+def edit_host(request, host_id):
+    host = get_object_or_404(Host, id=host_id)
+    if request.user not in host.owners.all():
+        return redirect('index')
+    form = HostForm(request.POST or None, instance=host)
+    if form.is_valid():
+        form.save()
+        return redirect('index')
+    context = {
+        'header': 'Редактирование хоста',
+        'button': 'Изменить',
+        'form': form
+    }
+    return render(request, 'login.html', context)

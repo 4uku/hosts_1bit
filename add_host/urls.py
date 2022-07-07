@@ -17,5 +17,6 @@ urlpatterns = [
             extra_context={'button': 'Выйти', 'header': 'Выйти из системы'},
             next_page='login'),
          name='logout'),
-    path('add_host/', views.add_host, name='add_host')
+    path('add_host/', views.add_host, name='add_host'),
+    path('hosts/<int:host_id>/edit_host/', views.edit_host, name='edit_host' )
 ]
