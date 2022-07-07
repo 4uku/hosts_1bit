@@ -6,8 +6,8 @@
 
 доступные эндпоинты:
 
-YOURHOST/signup/ - страница регистрация
-YOURHOST/login/ - страница авторизации
-YOURHOST/logout/ - страница выхода из профиля
-YOURHOST/add_host/ - страница добавления хоста
-YOURHOST/hosts/HOST_ID/edit/host - страница редактирования хоста
+- YOURHOST/signup/ - страница регистрация
+- YOURHOST/login/ - страница авторизации
+- YOURHOST/logout/ - страница выхода из профиля
+- YOURHOST/add_host/ - страница добавления хоста
+- YOURHOST/hosts/HOST_ID/edit/host - страница редактирования хоста
