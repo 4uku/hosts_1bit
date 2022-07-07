@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.csrf import csrf_exempt
 
-from .forms import HostForm
+from .forms import HostForm, HostFormAdmin
 from .models import Host
 
 
@@ -11,7 +11,7 @@ def index(request):
     context = {
         'header': 'Главная страница',
     }
-    if request.user:
+    if not request.user.is_anonymous:
         hosts = request.user.hosts.all()
         context.update({'hosts': hosts})
     return render(request, 'index.html', context)
@@ -55,7 +55,11 @@ def edit_host(request, host_id):
     host = get_object_or_404(Host, id=host_id)
     if request.user not in host.owners.all() and not request.user.is_staff:
         return redirect('index')
-    form = HostForm(request.POST or None, instance=host)
+    if request.user.is_staff:
+        form = HostFormAdmin(request.POST or None, instance=host)
+    else:
+        form = HostForm(request.POST or None, instance=host)
+
     if form.is_valid():
         form.save()
         return redirect('index')

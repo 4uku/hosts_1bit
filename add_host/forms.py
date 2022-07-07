@@ -12,3 +12,15 @@ class HostForm(forms.ModelForm):
             'port': 'Порт',
             'resource': 'Ресурс'
         }
+
+
+class HostFormAdmin(HostForm):
+    class Meta:
+        model = Host
+        fields = ('ip_adress', 'port', 'resource', 'owners')
+        labels = {
+            'ip_adress': 'IP адрес',
+            'port': 'Порт',
+            'resource': 'Ресурс',
+            'owners': 'Владельцы'
+        }
