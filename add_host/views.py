@@ -1,18 +1,26 @@
 from django.shortcuts import render  
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import redirect
+from django.views.decorators.csrf import csrf_exempt
 
-    
+
+def index(request):
+    context = {
+        'header': 'Главная страница'
+    }
+    return render(request, 'index.html', context)
+
+@csrf_exempt
 def signup(request):
-    header = 'Регистрация пользователя'
     form = UserCreationForm(request.POST or None) 
     if form.is_valid():  
         form.save()
-        return redirect('index')
+        return redirect('login')
 
     context = {  
         'form': form,
-        'header': header
+        'header': 'Регистрация пользователя',
+        'button': 'Зарегистрироваться'
     }
-    return render(request, 'signup.html', context)
-    
+    return render(request, 'login.html', context)
+
