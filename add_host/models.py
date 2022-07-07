@@ -13,7 +13,7 @@ class Host(models.Model):
     ip_adress = models.GenericIPAddressField('Ip адрес')
     port = models.IntegerField('Порт', validators=[MinValueValidator(0), MaxValueValidator(65536)])
     resource = models.CharField('Ресурс', choices=CHOICES, max_length=50)
-    owners = models.ManyToManyField(User, verbose_name='Владелец')
+    owners = models.ManyToManyField(User, verbose_name='Владелец', related_name='hosts')
     date_edit = models.DateTimeField('Дата редактирования', auto_now=True)
 
     class Meta:
@@ -23,3 +23,6 @@ class Host(models.Model):
         constraints = (
             models.UniqueConstraint(fields=['ip_adress', 'port'], name='uniq host/port'),
         )
+    
+    def __str__(self) -> str:
+        return f'{self.ip_adress}:{self.port}'
