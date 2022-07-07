@@ -1,11 +1,10 @@
-from django.shortcuts import render  
-from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import redirect
-from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import get_object_or_404, redirect, render
+from django.views.decorators.csrf import csrf_exempt
+
 from .forms import HostForm
 from .models import Host
-from django.shortcuts import get_object_or_404
 
 
 def index(request):
@@ -17,19 +16,21 @@ def index(request):
         context.update({'hosts': hosts})
     return render(request, 'index.html', context)
 
+
 @csrf_exempt
 def signup(request):
-    form = UserCreationForm(request.POST or None) 
-    if form.is_valid():  
+    form = UserCreationForm(request.POST or None)
+    if form.is_valid():
         form.save()
         return redirect('login')
 
-    context = {  
+    context = {
         'form': form,
         'header': 'Регистрация пользователя',
         'button': 'Зарегистрироваться'
     }
     return render(request, 'login.html', context)
+
 
 @login_required
 @csrf_exempt
@@ -52,7 +53,7 @@ def add_host(request):
 @csrf_exempt
 def edit_host(request, host_id):
     host = get_object_or_404(Host, id=host_id)
-    if request.user not in host.owners.all():
+    if request.user not in host.owners.all() and not request.user.is_staff:
         return redirect('index')
     form = HostForm(request.POST or None, instance=host)
     if form.is_valid():
