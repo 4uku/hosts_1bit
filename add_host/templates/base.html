@@ -24,6 +24,7 @@
           {% if user.is_authenticated %}
             Пользователь: {{ user.username }}.
             <a class="p-2 text-dark" href="{% url 'add_host' %}">Добавить хост</a>
+            <a class="p-2 text-dark" href="{% url 'all_hosts' %}">Все хосты</a>
             <a class="p-2 text-dark" href="{% url 'logout' %}">Выйти</a>
           {% else %}
             <a class="p-2 text-dark" href="{% url 'login' %}">Войти</a> |

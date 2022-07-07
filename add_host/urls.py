@@ -21,5 +21,6 @@ urlpatterns = [
             next_page='login'),
         name='logout'),
     path('add_host/', views.add_host, name='add_host'),
+    path('hosts/', views.all_hosts, name='all_hosts'),
     path('hosts/<int:host_id>/edit_host/', views.edit_host, name='edit_host')
 ]

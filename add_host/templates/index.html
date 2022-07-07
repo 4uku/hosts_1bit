@@ -2,29 +2,29 @@
 {% block title %}{{ header }}{% endblock %}
 {% block header %}{{ header }}{% endblock %}
 {% block content %}
-<h1>Ваши хосты</h1>
 <div class="container">
-    {% if user.is_authenticated %}
-    <table class="table">
-        <thead>
-            <tr>
-              <th scope="col">IP адрес</th>
-              <th scope="col">Порт</th>
-              <th scope="col">Ресурс</th>
-              <th scope="col">Последнее редактирование</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for host in hosts %}
-              <td>{{ host.ip_adress }}</td>
-              <td>{{ host.port }}</td>
-              <td>{{ host.resource }}</td>
-              <td>{{ host.date_edit }}</td>
-              <td><a href="{% url 'edit_host' host.id%}">Редактировать хост</a></td>
-            </tr>
-            {% endfor %}
-          </tbody>
+  Ваши хосты
+  {% if user.is_authenticated %}
+  <table class="table">
+      <thead>
+          <tr>
+            <th scope="col">IP адрес</th>
+            <th scope="col">Порт</th>
+            <th scope="col">Ресурс</th>
+            <th scope="col">Последнее редактирование</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for host in hosts %}
+            <td>{{ host.ip_adress }}</td>
+            <td>{{ host.port }}</td>
+            <td>{{ host.resource }}</td>
+            <td>{{ host.date_edit }}</td>
+            <td><a href="{% url 'edit_host' host.id%}">Редактировать хост</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
         
     </table>
     {% else %}
